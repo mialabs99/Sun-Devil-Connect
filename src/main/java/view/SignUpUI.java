@@ -9,6 +9,7 @@ package view;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,8 @@ public class SignUpUI {
     private static TextField asuriteIDField;
     private static TextField passwordField;
     private static TextField passwordVerificationField;
+    private static TextField firstNameField;
+    private static TextField lastNameField;
 
     //UI display
     public static void displaySignUpPage(Stage stage) {
@@ -32,9 +35,16 @@ public class SignUpUI {
         HBox asuriteIDHBox = createHBoxLine("ASURITE ID: ");
         HBox passwordHBox = createHBoxLine("Password: ");
         HBox passwordVerificationHBox = createHBoxLine("Verify Password: ");
+        HBox roleHBox = new HBox();
+        Label roleLabel = new Label("Choose your role: ");
+        ComboBox<String> dropdown = new ComboBox<>();
+        dropdown.getItems().add("Student");
+        dropdown.getItems().add("Leader");
+        dropdown.getItems().add("Admin");
+        roleHBox.getChildren().addAll(roleLabel, dropdown);
         Button enter = new Button("Enter");
-        enter.setOnAction(e -> authenticateSignUp(asuriteIDField.getText(), passwordField.getText(),
-                passwordVerificationField.getText()));
+        enter.setOnAction(e -> authenticateSignUp(stage, asuriteIDField.getText(), passwordField.getText(),
+                passwordVerificationField.getText(), firstNameField.getText(), lastNameField.getText(), dropdown.getValue()));
         Button back = new Button("Back");
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(back, enter);
@@ -42,7 +52,7 @@ public class SignUpUI {
         buttonBox.setSpacing(10);
         VBox signUpBox = new VBox();
         signUpBox.getChildren().addAll(signUpLabel, firstNameHBox, lastNameHBox, asuriteIDHBox, passwordHBox,
-                passwordVerificationHBox, buttonBox);
+                passwordVerificationHBox, roleHBox, buttonBox);
         signUpBox.setSpacing(10);
         signUpBox.setAlignment(Pos.CENTER);
         Scene signUpScene = new Scene(signUpBox, 400, 400);
@@ -57,19 +67,47 @@ public class SignUpUI {
         HBox hbox = new HBox();
         Label label = new Label(labelText);
         hbox.getChildren().add(label);
-        if(labelText.equals("ASURITE ID: ")) {
-            asuriteIDField = new TextField();
-            hbox.getChildren().add(asuriteIDField);
-        } else if(labelText.equals("Password: ")) {
-            passwordField = new TextField();
-            hbox.getChildren().add(passwordField);
-        } else if(labelText.equals("Verify Password: ")) {
-            passwordVerificationField = new TextField();
-            hbox.getChildren().add(passwordVerificationField);
-        } else {
-            TextField textField = new TextField();
-            hbox.getChildren().add(textField);
+        switch (labelText) {
+            case "ASURITE ID: " -> {
+                asuriteIDField = new TextField();
+                hbox.getChildren().add(asuriteIDField);
+            }
+            case "Password: " -> {
+                passwordField = new TextField();
+                hbox.getChildren().add(passwordField);
+            }
+            case "Verify Password: " -> {
+                passwordVerificationField = new TextField();
+                hbox.getChildren().add(passwordVerificationField);
+            }
+            case "First name: " -> {
+                firstNameField = new TextField();
+                hbox.getChildren().add(firstNameField);
+            }
+            case "Last name: " -> {
+                lastNameField = new TextField();
+                hbox.getChildren().add(lastNameField);
+            }
+            default -> {
+                TextField textField = new TextField();
+                hbox.getChildren().add(textField);
+            }
         }
         return hbox;
     }
+
+    public static void invalidPasswordVerification(Stage stage) {
+        Label invalidPasswordVerification = new Label("The passwords you entered do not match. Please try again.");
+        VBox invalidVerificationBox = new VBox();
+        Button okay = new Button("Okay");
+        okay.setOnAction(e -> displaySignUpPage(stage));
+        invalidVerificationBox.getChildren().addAll(invalidPasswordVerification, okay);
+        invalidVerificationBox.setSpacing(10);
+        invalidVerificationBox.setAlignment(Pos.CENTER);
+        Scene invalidVerificationScene = new Scene(invalidVerificationBox, 200, 200);
+        stage.setTitle("Invalid Password Verification");
+        stage.setScene(invalidVerificationScene);
+        stage.show();
+    }
+
 }
