@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import static controller.Authenticator.authenticate;
+import static controller.Authenticator.authenticateSignUp;
 import static view.WelcomePageUI.displayWelcomePage;
 
 //UI for users to sign up for an account
@@ -24,6 +24,7 @@ public class SignUpUI {
     private static TextField passwordField;
     private static TextField passwordVerificationField;
 
+    //UI display
     public static void displaySignUpPage() {
         Stage signUpStage = new Stage();
         Label signUpLabel = new Label("Please fill out the following form to sign up:");
@@ -33,13 +34,16 @@ public class SignUpUI {
         HBox passwordHBox = createHBoxLine("Password: ");
         HBox passwordVerificationHBox = createHBoxLine("Verify Password: ");
         Button enter = new Button("Enter");
-        enter.setOnAction(e -> authenticate(asuriteIDField.getText(), passwordField.getText(),
+        enter.setOnAction(e -> authenticateSignUp(asuriteIDField.getText(), passwordField.getText(),
                 passwordVerificationField.getText()));
         Button back = new Button("Back");
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(back, enter);
         back.setOnAction(e -> displayWelcomePage(signUpStage));
+        buttonBox.setSpacing(10);
         VBox signUpBox = new VBox();
         signUpBox.getChildren().addAll(signUpLabel, firstNameHBox, lastNameHBox, asuriteIDHBox, passwordHBox,
-                passwordVerificationHBox);
+                passwordVerificationHBox, buttonBox);
         signUpBox.setSpacing(10);
         signUpBox.setAlignment(Pos.CENTER);
         Scene signUpScene = new Scene(signUpBox, 400, 400);
@@ -48,6 +52,8 @@ public class SignUpUI {
         signUpStage.show();
     }
 
+    //Method for creating HBoxes distinct to the SignUpUI
+    //Should change later to minimize functions
     public static HBox createHBoxLine(String labelText) {
         HBox hbox = new HBox();
         Label label = new Label(labelText);
