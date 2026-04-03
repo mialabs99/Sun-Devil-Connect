@@ -25,8 +25,7 @@ public class SignUpUI {
     private static TextField passwordVerificationField;
 
     //UI display
-    public static void displaySignUpPage() {
-        Stage signUpStage = new Stage();
+    public static void displaySignUpPage(Stage stage) {
         Label signUpLabel = new Label("Please fill out the following form to sign up:");
         HBox firstNameHBox = createHBoxLine("First name: ");
         HBox lastNameHBox = createHBoxLine("Last name: ");
@@ -39,7 +38,7 @@ public class SignUpUI {
         Button back = new Button("Back");
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(back, enter);
-        back.setOnAction(e -> displayWelcomePage(signUpStage));
+        back.setOnAction(e -> displayWelcomePage(stage));
         buttonBox.setSpacing(10);
         VBox signUpBox = new VBox();
         signUpBox.getChildren().addAll(signUpLabel, firstNameHBox, lastNameHBox, asuriteIDHBox, passwordHBox,
@@ -47,9 +46,9 @@ public class SignUpUI {
         signUpBox.setSpacing(10);
         signUpBox.setAlignment(Pos.CENTER);
         Scene signUpScene = new Scene(signUpBox, 400, 400);
-        signUpStage.setTitle("Sign Up");
-        signUpStage.setScene(signUpScene);
-        signUpStage.show();
+        stage.setTitle("Sign Up");
+        stage.setScene(signUpScene);
+        stage.show();
     }
 
     //Method for creating HBoxes distinct to the SignUpUI

@@ -30,9 +30,9 @@ public class WelcomePageUI extends Application {
         Label welcomeLabel = new Label("Welcome to Sun Devil Connect!");
         Label chooseLabel = new Label("Please choose one of the following options:");
         Button signIn = new Button("Sign In");
-        signIn.setOnAction(e -> navigateToSection(SIGN_IN));
+        signIn.setOnAction(e -> navigateToSection(stage, SIGN_IN));
         Button signUp = new Button("Sign Up");
-        signUp.setOnAction(e -> navigateToSection(SIGN_UP));
+        signUp.setOnAction(e -> navigateToSection(stage, SIGN_UP));
         VBox welcomeBox = new VBox();
         welcomeBox.getChildren().addAll(welcomeLabel, chooseLabel, signIn, signUp);
         welcomeBox.setSpacing(10);
@@ -44,11 +44,11 @@ public class WelcomePageUI extends Application {
     }
 
     //Sends user selection to the controller for further implementation
-    public static void navigateToSection(int choice) {
+    public static void navigateToSection(Stage stage, int choice) {
         if(choice == SIGN_IN) {
-            displaySignInPage();
+            displaySignInPage(stage);
         } else if(choice == SIGN_UP) {
-            displaySignUpPage();
+            displaySignUpPage(stage);
         }
     }
 

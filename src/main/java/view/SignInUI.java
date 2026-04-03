@@ -24,15 +24,14 @@ public class SignInUI {
     private static TextField passwordField;
 
     //UI display
-    public static void displaySignInPage() {
-        Stage signInStage = new Stage();
+    public static void displaySignInPage(Stage stage) {
         Label signInLabel = new Label("Please enter your credentials below:");
         HBox asuriteIDHBox = createHBoxLine("ASURITE ID: ");
         HBox passwordHBox = createHBoxLine("Password: ");
         Button enter = new Button("Enter");
         enter.setOnAction(e -> authenticateSignIn(asuriteIDField.getText(), passwordField.getText()));
         Button back = new Button("Back");
-        back.setOnAction(e -> displayWelcomePage(signInStage));
+        back.setOnAction(e -> displayWelcomePage(stage));
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(back, enter);
         buttonBox.setSpacing(10);
@@ -42,9 +41,9 @@ public class SignInUI {
         signInBox.setSpacing(10);
         signInBox.setAlignment(Pos.CENTER);
         Scene signInScene = new Scene(signInBox, 400, 400);
-        signInStage.setTitle("Sign In");
-        signInStage.setScene(signInScene);
-        signInStage.show();
+        stage.setTitle("Sign In");
+        stage.setScene(signInScene);
+        stage.show();
     }
 
     //Method for creating HBoxes distinct to the SignInUI
