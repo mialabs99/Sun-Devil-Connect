@@ -8,7 +8,11 @@ package controller;
 
 public class Authenticator {
 
-    public static void authenticate(String asuriteID, String password, String passwordVerification) {
+    public static void authenticateSignUp(String asuriteID, String password, String passwordVerification) {
+
+    }
+
+    public static void authenticateSignIn(String asuriteID, String password) {
 
     }
 
