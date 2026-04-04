@@ -1,0 +1,16 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom, #470000, #F5BB29);
+    -fx-font-family: Georgia;
+}
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: #470000;
+    -fx-text-fill: #F5BB29;
+    -fx-font-weight: bold;
+}

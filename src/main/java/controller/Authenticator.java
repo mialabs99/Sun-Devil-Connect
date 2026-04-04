@@ -18,6 +18,7 @@ import java.util.List;
 import static view.SignInUI.invalidAsuriteID;
 import static view.SignInUI.invalidPassword;
 import static view.SignUpUI.invalidPasswordVerification;
+import static view.StudentViewUI.displayStudentView;
 
 public class Authenticator {
 
@@ -32,6 +33,7 @@ public class Authenticator {
         }
         try {
             saveUser(firstName, lastName, asuriteID, password, role);
+            displayStudentView(stage, firstName);
         } catch (Exception e) {
             System.out.println("Could not save new user to the file: " + e.getMessage());
         }
@@ -45,6 +47,9 @@ public class Authenticator {
                     System.out.println("Found valid ASURITE ID. Validating password...");
                     if(user.getPassword().equals(password)) {
                         System.out.println("Password matches. Logging user into the system.");
+                        if(user.getUserRole() == User.role.student) {
+                            displayStudentView(stage, user.getFirstName());
+                        }
                     } else {
                         System.out.println("Password does not match the given ID.");
                         invalidPassword(stage);
@@ -72,7 +77,8 @@ public class Authenticator {
         File file = new File("users.json");
         ObjectMapper mapper = new ObjectMapper();
         if(file.exists()) {
-            users = mapper.readValue(file, new TypeReference<List<User>>() {});
+            users = mapper.readValue(file, new TypeReference<>() {
+            });
         } else {
             users = new ArrayList<>();
         }
@@ -82,7 +88,8 @@ public class Authenticator {
 
     public static void loadUsers() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
-        users = mapper.readValue(new File("users.json"), new TypeReference<List<User>>() {});
+        users = mapper.readValue(new File("users.json"), new TypeReference<>() {
+        });
     }
 
 }

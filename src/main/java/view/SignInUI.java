@@ -15,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 import static controller.Authenticator.authenticateSignIn;
 import static view.SignUpUI.displaySignUpPage;
 import static view.WelcomePageUI.displayWelcomePage;
@@ -42,6 +44,9 @@ public class SignInUI {
         signInBox.setSpacing(10);
         signInBox.setAlignment(Pos.CENTER);
         Scene signInScene = new Scene(signInBox, 400, 400);
+        signInScene.getStylesheets().add(
+                Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
+        );
         stage.setTitle("Sign In");
         stage.setScene(signInScene);
         stage.show();
@@ -82,6 +87,9 @@ public class SignInUI {
         invalidAsuriteIDBox.setSpacing(10);
         invalidAsuriteIDBox.setAlignment(Pos.CENTER);
         Scene invalidAsuriteScene = new Scene(invalidAsuriteIDBox, 200, 200);
+        invalidAsuriteScene.getStylesheets().add(
+                Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
+        );
         stage.setTitle("Invalid Password Verification");
         stage.setScene(invalidAsuriteScene);
         stage.show();
@@ -95,7 +103,10 @@ public class SignInUI {
         invalidPasswordBox.getChildren().addAll(invalidPassword, tryAgain);
         invalidPasswordBox.setSpacing(10);
         invalidPasswordBox.setAlignment(Pos.CENTER);
-        Scene invalidPasswordScene = new Scene(invalidPasswordBox, 200, 200);
+        Scene invalidPasswordScene = new Scene(invalidPasswordBox, 300, 300);
+        invalidPasswordScene.getStylesheets().add(
+                Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
+        );
         stage.setTitle("Invalid Password");
         stage.setScene(invalidPasswordScene);
         stage.show();

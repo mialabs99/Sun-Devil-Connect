@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 import static view.SignInUI.displaySignInPage;
 import static view.SignUpUI.displaySignUpPage;
 
@@ -38,6 +40,9 @@ public class WelcomePageUI extends Application {
         welcomeBox.setSpacing(10);
         welcomeBox.setAlignment(Pos.CENTER);
         Scene welcomeScene = new Scene(welcomeBox, 400, 400);
+        welcomeScene.getStylesheets().add(
+                Objects.requireNonNull(WelcomePageUI.class.getResource("/style.css")).toExternalForm()
+        );
         stage.setTitle("Welcome");
         stage.setScene(welcomeScene);
         stage.show();
@@ -56,4 +61,5 @@ public class WelcomePageUI extends Application {
     public void start(Stage stage) {
         displayWelcomePage(stage);
     }
+
 }
