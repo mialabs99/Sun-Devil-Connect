@@ -39,7 +39,7 @@ public class WelcomePageUI extends Application {
         welcomeBox.getChildren().addAll(welcomeLabel, chooseLabel, signIn, signUp);
         welcomeBox.setSpacing(10);
         welcomeBox.setAlignment(Pos.CENTER);
-        Scene welcomeScene = new Scene(welcomeBox, 400, 400);
+        Scene welcomeScene = new Scene(welcomeBox, 500, 500);
         welcomeScene.getStylesheets().add(
                 Objects.requireNonNull(WelcomePageUI.class.getResource("/style.css")).toExternalForm()
         );

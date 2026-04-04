@@ -57,7 +57,7 @@ public class SignUpUI {
                 passwordVerificationHBox, roleHBox, buttonBox);
         signUpBox.setSpacing(10);
         signUpBox.setAlignment(Pos.CENTER);
-        Scene signUpScene = new Scene(signUpBox, 400, 400);
+        Scene signUpScene = new Scene(signUpBox, 500, 500);
         signUpScene.getStylesheets().add(
                 Objects.requireNonNull(SignUpUI.class.getResource("/style.css")).toExternalForm()
         );
@@ -109,7 +109,7 @@ public class SignUpUI {
         invalidVerificationBox.getChildren().addAll(invalidPasswordVerification, okay);
         invalidVerificationBox.setSpacing(10);
         invalidVerificationBox.setAlignment(Pos.CENTER);
-        Scene invalidVerificationScene = new Scene(invalidVerificationBox, 300, 300);
+        Scene invalidVerificationScene = new Scene(invalidVerificationBox, 300, 400);
         invalidVerificationScene.getStylesheets().add(
                 Objects.requireNonNull(SignUpUI.class.getResource("/style.css")).toExternalForm()
         );

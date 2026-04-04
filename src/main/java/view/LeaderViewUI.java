@@ -22,7 +22,7 @@ public class LeaderViewUI {
         leaderViewBox.getChildren().addAll(leaderViewLabel, placeHolderLabel, exit);
         leaderViewBox.setSpacing(10);
         leaderViewBox.setAlignment(Pos.CENTER);
-        Scene leaderViewScene = new Scene(leaderViewBox, 400, 400);
+        Scene leaderViewScene = new Scene(leaderViewBox, 500, 500);
         leaderViewScene.getStylesheets().add(
                 Objects.requireNonNull(LeaderViewUI.class.getResource("/style.css")).toExternalForm()
         );

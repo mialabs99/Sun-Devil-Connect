@@ -43,7 +43,7 @@ public class SignInUI {
         signInBox.getChildren().addAll(signInLabel, asuriteIDHBox, passwordHBox, buttonBox);
         signInBox.setSpacing(10);
         signInBox.setAlignment(Pos.CENTER);
-        Scene signInScene = new Scene(signInBox, 400, 400);
+        Scene signInScene = new Scene(signInBox, 500, 500);
         signInScene.getStylesheets().add(
                 Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
         );
@@ -86,7 +86,7 @@ public class SignInUI {
         invalidAsuriteIDBox.getChildren().addAll(invalidAsuriteID, options, buttonBox);
         invalidAsuriteIDBox.setSpacing(10);
         invalidAsuriteIDBox.setAlignment(Pos.CENTER);
-        Scene invalidAsuriteScene = new Scene(invalidAsuriteIDBox, 200, 200);
+        Scene invalidAsuriteScene = new Scene(invalidAsuriteIDBox, 300, 400);
         invalidAsuriteScene.getStylesheets().add(
                 Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
         );
@@ -103,7 +103,7 @@ public class SignInUI {
         invalidPasswordBox.getChildren().addAll(invalidPassword, tryAgain);
         invalidPasswordBox.setSpacing(10);
         invalidPasswordBox.setAlignment(Pos.CENTER);
-        Scene invalidPasswordScene = new Scene(invalidPasswordBox, 300, 300);
+        Scene invalidPasswordScene = new Scene(invalidPasswordBox, 300, 400);
         invalidPasswordScene.getStylesheets().add(
                 Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
         );

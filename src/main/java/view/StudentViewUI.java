@@ -29,7 +29,7 @@ public class StudentViewUI {
         studentViewBox.getChildren().addAll(studentViewLabel, placeHolderLabel, exit);
         studentViewBox.setSpacing(10);
         studentViewBox.setAlignment(Pos.CENTER);
-        Scene studentViewScene = new Scene(studentViewBox, 400, 400);
+        Scene studentViewScene = new Scene(studentViewBox, 500, 500);
         studentViewScene.getStylesheets().add(
                 Objects.requireNonNull(StudentViewUI.class.getResource("/style.css")).toExternalForm()
         );

@@ -22,7 +22,7 @@ public class AdminViewUI {
         adminViewBox.getChildren().addAll(adminViewLabel, placeHolderLabel, exit);
         adminViewBox.setSpacing(10);
         adminViewBox.setAlignment(Pos.CENTER);
-        Scene adminViewScene = new Scene(adminViewBox, 400, 400);
+        Scene adminViewScene = new Scene(adminViewBox, 500, 500);
         adminViewScene.getStylesheets().add(
                 Objects.requireNonNull(AdminViewUI.class.getResource("/style.css")).toExternalForm()
         );
