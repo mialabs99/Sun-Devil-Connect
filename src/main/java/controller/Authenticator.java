@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static view.AdminViewUI.displayAdminView;
 import static view.LeaderViewUI.displayLeaderView;
 import static view.SignInUI.invalidAsuriteID;
 import static view.SignInUI.invalidPassword;
@@ -53,7 +54,7 @@ public class Authenticator {
                         } else if(user.getUserRole() == User.role.leader) {
                             displayLeaderView(stage, user.getFirstName());
                         } else if(user.getUserRole() == User.role.admin) {
-
+                            displayAdminView(stage, user.getFirstName());
                         }
                     } else {
                         System.out.println("Password does not match the given ID.");
