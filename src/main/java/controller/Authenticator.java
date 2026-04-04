@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static view.LeaderViewUI.displayLeaderView;
 import static view.SignInUI.invalidAsuriteID;
 import static view.SignInUI.invalidPassword;
 import static view.SignUpUI.invalidPasswordVerification;
@@ -49,6 +50,10 @@ public class Authenticator {
                         System.out.println("Password matches. Logging user into the system.");
                         if(user.getUserRole() == User.role.student) {
                             displayStudentView(stage, user.getFirstName());
+                        } else if(user.getUserRole() == User.role.leader) {
+                            displayLeaderView(stage, user.getFirstName());
+                        } else if(user.getUserRole() == User.role.admin) {
+
                         }
                     } else {
                         System.out.println("Password does not match the given ID.");
