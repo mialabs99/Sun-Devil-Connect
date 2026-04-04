@@ -15,7 +15,7 @@ public class AdminViewUI {
 
     public static void displayAdminView(Stage stage, String firstName) {
         Label adminViewLabel = new Label("Welcome " + firstName + "!");
-        Label placeHolderLabel = new Label("*Events and clubs will go here*");
+        Label placeHolderLabel = new Label("*Admin functionality will go here*");
         Button exit = new Button("Exit");
         exit.setOnAction(e -> displayWelcomePage(stage));
         VBox adminViewBox = new VBox();

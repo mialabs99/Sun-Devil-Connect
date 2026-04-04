@@ -15,7 +15,7 @@ public class LeaderViewUI {
 
     public static void displayLeaderView(Stage stage, String firstName) {
         Label leaderViewLabel = new Label("Welcome " + firstName + "!");
-        Label placeHolderLabel = new Label("*Events and clubs will go here*");
+        Label placeHolderLabel = new Label("*Leader functionality will go here*");
         Button exit = new Button("Exit");
         exit.setOnAction(e -> displayWelcomePage(stage));
         VBox leaderViewBox = new VBox();
