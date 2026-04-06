@@ -6,20 +6,17 @@
 
 package view;
 
+import controller.ViewManager;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.util.Objects;
 
 import static controller.Authenticator.authenticateSignUp;
-import static view.WelcomePageUI.displayWelcomePage;
 
 //UI for users to sign up for an account
 public class SignUpUI {
@@ -30,7 +27,7 @@ public class SignUpUI {
     private static TextField lastNameField;
 
     //UI display
-    public static void displaySignUpPage(Stage stage) {
+    public static Parent signUpPage() {
         Label signUpLabel = new Label("Please fill out the following form to sign up:");
         HBox firstNameHBox = createHBoxLine("First name: ");
         HBox lastNameHBox = createHBoxLine("Last name: ");
@@ -45,25 +42,19 @@ public class SignUpUI {
         dropdown.getItems().add("Admin");
         roleHBox.getChildren().addAll(roleLabel, dropdown);
         Button enter = new Button("Enter");
-        enter.setOnAction(e -> authenticateSignUp(stage, asuriteIDField.getText(), passwordField.getText(),
+        enter.setOnAction(e -> authenticateSignUp(asuriteIDField.getText(), passwordField.getText(),
                 passwordVerificationField.getText(), firstNameField.getText(), lastNameField.getText(), dropdown.getValue()));
         Button back = new Button("Back");
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(back, enter);
-        back.setOnAction(e -> displayWelcomePage(stage));
+        back.setOnAction(e -> ViewManager.displayWelcomePage());
         buttonBox.setSpacing(10);
         VBox signUpBox = new VBox();
         signUpBox.getChildren().addAll(signUpLabel, firstNameHBox, lastNameHBox, asuriteIDHBox, passwordHBox,
                 passwordVerificationHBox, roleHBox, buttonBox);
         signUpBox.setSpacing(10);
         signUpBox.setAlignment(Pos.CENTER);
-        Scene signUpScene = new Scene(signUpBox, 500, 500);
-        signUpScene.getStylesheets().add(
-                Objects.requireNonNull(SignUpUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Sign Up");
-        stage.setScene(signUpScene);
-        stage.show();
+        return signUpBox;
     }
 
     //Method for creating HBoxes distinct to the SignUpUI
@@ -101,21 +92,15 @@ public class SignUpUI {
         return hbox;
     }
 
-    public static void invalidPasswordVerification(Stage stage) {
+    public static Parent invalidPasswordVerification() {
         Label invalidPasswordVerification = new Label("The passwords you entered do not match. Please try again.");
         VBox invalidVerificationBox = new VBox();
         Button okay = new Button("Okay");
-        okay.setOnAction(e -> displaySignUpPage(stage));
+        okay.setOnAction(e -> ViewManager.displaySignUpPage());
         invalidVerificationBox.getChildren().addAll(invalidPasswordVerification, okay);
         invalidVerificationBox.setSpacing(10);
         invalidVerificationBox.setAlignment(Pos.CENTER);
-        Scene invalidVerificationScene = new Scene(invalidVerificationBox, 300, 400);
-        invalidVerificationScene.getStylesheets().add(
-                Objects.requireNonNull(SignUpUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Invalid Password Verification");
-        stage.setScene(invalidVerificationScene);
-        stage.show();
+        return invalidVerificationBox;
     }
 
 }

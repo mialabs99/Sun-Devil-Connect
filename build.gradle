@@ -28,6 +28,6 @@ javafx {
 }
 
 application {
-    mainClass = 'view.WelcomePageUI'
+    mainClass = 'controller.ViewManager'
 }
 

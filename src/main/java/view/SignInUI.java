@@ -6,20 +6,16 @@
 
 package view;
 
+import controller.ViewManager;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.util.Objects;
 
 import static controller.Authenticator.authenticateSignIn;
-import static view.SignUpUI.displaySignUpPage;
-import static view.WelcomePageUI.displayWelcomePage;
 
 //UI for users to sign in to a pre-registered account
 public class SignInUI {
@@ -27,14 +23,14 @@ public class SignInUI {
     private static TextField passwordField;
 
     //UI display
-    public static void displaySignInPage(Stage stage) {
+    public static Parent signInPage() {
         Label signInLabel = new Label("Please enter your credentials below:");
         HBox asuriteIDHBox = createHBoxLine("ASURITE ID: ");
         HBox passwordHBox = createHBoxLine("Password: ");
         Button enter = new Button("Enter");
-        enter.setOnAction(e -> authenticateSignIn(stage, asuriteIDField.getText(), passwordField.getText()));
+        enter.setOnAction(e -> authenticateSignIn(asuriteIDField.getText(), passwordField.getText()));
         Button back = new Button("Back");
-        back.setOnAction(e -> displayWelcomePage(stage));
+        back.setOnAction(e -> ViewManager.displayWelcomePage());
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(back, enter);
         buttonBox.setSpacing(10);
@@ -43,13 +39,7 @@ public class SignInUI {
         signInBox.getChildren().addAll(signInLabel, asuriteIDHBox, passwordHBox, buttonBox);
         signInBox.setSpacing(10);
         signInBox.setAlignment(Pos.CENTER);
-        Scene signInScene = new Scene(signInBox, 500, 500);
-        signInScene.getStylesheets().add(
-                Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Sign In");
-        stage.setScene(signInScene);
-        stage.show();
+        return signInBox;
     }
 
     //Method for creating HBoxes distinct to the SignInUI
@@ -71,14 +61,14 @@ public class SignInUI {
         return hbox;
     }
 
-    public static void invalidAsuriteID(Stage stage) {
+    public static Parent invalidAsuriteID() {
         Label invalidAsuriteID = new Label("The system could not find a user with that ASURITE ID.");
         Label options = new Label("Either try a different ID or sign up for a free account.");
         VBox invalidAsuriteIDBox = new VBox();
         Button differentID = new Button("Different ID");
-        differentID.setOnAction(e -> displaySignInPage(stage));
+        differentID.setOnAction(e -> ViewManager.displaySignInPage());
         Button signUp = new Button("Sign Up");
-        signUp.setOnAction(e -> displaySignUpPage(stage));
+        signUp.setOnAction(e -> ViewManager.displaySignUpPage());
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(differentID, signUp);
         buttonBox.setSpacing(10);
@@ -86,30 +76,18 @@ public class SignInUI {
         invalidAsuriteIDBox.getChildren().addAll(invalidAsuriteID, options, buttonBox);
         invalidAsuriteIDBox.setSpacing(10);
         invalidAsuriteIDBox.setAlignment(Pos.CENTER);
-        Scene invalidAsuriteScene = new Scene(invalidAsuriteIDBox, 300, 400);
-        invalidAsuriteScene.getStylesheets().add(
-                Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Invalid Password Verification");
-        stage.setScene(invalidAsuriteScene);
-        stage.show();
+        return invalidAsuriteIDBox;
     }
 
-    public static void invalidPassword(Stage stage) {
+    public static Parent invalidPassword() {
         Label invalidPassword = new Label("The password you entered does not match the one in our files.");
         VBox invalidPasswordBox = new VBox();
         Button tryAgain = new Button("Try Again");
-        tryAgain.setOnAction(e -> displaySignInPage(stage));
+        tryAgain.setOnAction(e -> ViewManager.displaySignInPage());
         invalidPasswordBox.getChildren().addAll(invalidPassword, tryAgain);
         invalidPasswordBox.setSpacing(10);
         invalidPasswordBox.setAlignment(Pos.CENTER);
-        Scene invalidPasswordScene = new Scene(invalidPasswordBox, 300, 400);
-        invalidPasswordScene.getStylesheets().add(
-                Objects.requireNonNull(SignInUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Invalid Password");
-        stage.setScene(invalidPasswordScene);
-        stage.show();
+        return invalidPasswordBox;
     }
 
 }

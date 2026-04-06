@@ -6,60 +6,45 @@
 
 package view;
 
-import javafx.application.Application;
+import controller.ViewManager;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.util.Objects;
-
-import static view.SignInUI.displaySignInPage;
-import static view.SignUpUI.displaySignUpPage;
-
-public class WelcomePageUI extends Application {
+public class WelcomePageUI{
     private static final int SIGN_IN = 0;
     private static final int SIGN_UP = 1;
 
-    static void main(String[] args) {
-        launch(args);
-    }
-
     //Displays the initial welcome page for the user
-    public static void displayWelcomePage(Stage stage) {
+    public static Parent welcomePage() {
         Label welcomeLabel = new Label("Welcome to Sun Devil Connect!");
         Label chooseLabel = new Label("Please choose one of the following options:");
         Button signIn = new Button("Sign In");
-        signIn.setOnAction(e -> navigateToSection(stage, SIGN_IN));
+        signIn.setOnAction(e -> {
+            System.out.println("Sign in button pressed");
+            navigateToSection(SIGN_IN);
+        });
         Button signUp = new Button("Sign Up");
-        signUp.setOnAction(e -> navigateToSection(stage, SIGN_UP));
+        signUp.setOnAction(e -> {
+            System.out.println("Sign up button pressed");
+            navigateToSection(SIGN_UP);
+        });
         VBox welcomeBox = new VBox();
         welcomeBox.getChildren().addAll(welcomeLabel, chooseLabel, signIn, signUp);
         welcomeBox.setSpacing(10);
         welcomeBox.setAlignment(Pos.CENTER);
-        Scene welcomeScene = new Scene(welcomeBox, 500, 500);
-        welcomeScene.getStylesheets().add(
-                Objects.requireNonNull(WelcomePageUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Welcome");
-        stage.setScene(welcomeScene);
-        stage.show();
+        return welcomeBox;
     }
 
     //Sends user selection to the controller for further implementation
-    public static void navigateToSection(Stage stage, int choice) {
+    public static void navigateToSection(int choice) {
         if(choice == SIGN_IN) {
-            displaySignInPage(stage);
+            ViewManager.displaySignInPage();
         } else if(choice == SIGN_UP) {
-            displaySignUpPage(stage);
+            ViewManager.displaySignUpPage();
         }
-    }
-
-    @Override
-    public void start(Stage stage) {
-        displayWelcomePage(stage);
     }
 
 }

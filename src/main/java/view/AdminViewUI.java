@@ -1,33 +1,23 @@
 package view;
 
+import controller.ViewManager;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.util.Objects;
-
-import static view.WelcomePageUI.displayWelcomePage;
 
 public class AdminViewUI {
 
-    public static void displayAdminView(Stage stage, String firstName) {
+    public static Parent adminView(String firstName) {
         Label adminViewLabel = new Label("Welcome " + firstName + "!");
         Label placeHolderLabel = new Label("*Admin functionality will go here*");
         Button exit = new Button("Exit");
-        exit.setOnAction(e -> displayWelcomePage(stage));
+        exit.setOnAction(e -> ViewManager.displayWelcomePage());
         VBox adminViewBox = new VBox();
         adminViewBox.getChildren().addAll(adminViewLabel, placeHolderLabel, exit);
         adminViewBox.setSpacing(10);
         adminViewBox.setAlignment(Pos.CENTER);
-        Scene adminViewScene = new Scene(adminViewBox, 500, 500);
-        adminViewScene.getStylesheets().add(
-                Objects.requireNonNull(AdminViewUI.class.getResource("/style.css")).toExternalForm()
-        );
-        stage.setTitle("Welcome");
-        stage.setScene(adminViewScene);
-        stage.show();
+        return adminViewBox;
     }
 }
