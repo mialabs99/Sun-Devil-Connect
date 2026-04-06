@@ -50,10 +50,11 @@ public class SignUpUI {
         back.setOnAction(e -> ViewManager.displayWelcomePage());
         buttonBox.setSpacing(10);
         VBox signUpBox = new VBox();
+        signUpBox.setAlignment(Pos.CENTER);
         signUpBox.getChildren().addAll(signUpLabel, firstNameHBox, lastNameHBox, asuriteIDHBox, passwordHBox,
                 passwordVerificationHBox, roleHBox, buttonBox);
         signUpBox.setSpacing(10);
-        signUpBox.setAlignment(Pos.CENTER);
+        signUpBox.setFillWidth(false);
         return signUpBox;
     }
 

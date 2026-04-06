@@ -39,6 +39,7 @@ public class SignInUI {
         signInBox.getChildren().addAll(signInLabel, asuriteIDHBox, passwordHBox, buttonBox);
         signInBox.setSpacing(10);
         signInBox.setAlignment(Pos.CENTER);
+        signInBox.setFillWidth(false);
         return signInBox;
     }
 
