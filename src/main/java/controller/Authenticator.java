@@ -47,22 +47,27 @@ public class Authenticator {
                     System.out.println("User role detected: " + user.getUserRole());
                     if(user.getPassword().equals(password)) {
                         System.out.println("Password matches. Logging user into the system.");
-                        if(user instanceof Student) {
-                            System.out.println("Switching screen to student view");
-                            ViewManager.displayStudentView(user.getFirstName());
-                        } else if(user instanceof Leader) {
-                            System.out.println("Switching screen to leader view");
-                            ViewManager.displayLeaderView(user.getFirstName());
-                        } else if(user instanceof Admin) {
-                            System.out.println("Switching screen to admin view");
-                            ViewManager.displayAdminView(user.getFirstName());
+                        switch (user) {
+                            case Student student -> {
+                                System.out.println("Switching screen to student view");
+                                ViewManager.displayStudentView(user.getFirstName());
+                            }
+                            case Leader leader -> {
+                                System.out.println("Switching screen to leader view");
+                                ViewManager.displayLeaderView(user.getFirstName());
+                            }
+                            case Admin admin -> {
+                                System.out.println("Switching screen to admin view");
+                                ViewManager.displayAdminView(user.getFirstName());
+                            }
+                            default -> {
+                            }
                         }
-                        return;
                     } else {
                         System.out.println("Password does not match the given ID.");
                         ViewManager.displayInvalidPassword();
-                        return;
                     }
+                    return;
                 }
             }
             System.out.println("Could not find a user with that ASURITE ID.");
@@ -82,8 +87,7 @@ public class Authenticator {
         File file = new File("users.json");
         ObjectMapper mapper = new ObjectMapper();
         if(file.exists()) {
-            users = mapper.readValue(file, new TypeReference<>() {
-            });
+            users = mapper.readValue(file, new TypeReference<>() {});
         } else {
             users = new ArrayList<>();
         }
@@ -93,8 +97,7 @@ public class Authenticator {
 
     public static void loadUsers() throws Exception{
         ObjectMapper mapper = new ObjectMapper();
-        users = mapper.readValue(new File("users.json"), new TypeReference<>() {
-        });
+        users = mapper.readValue(new File("users.json"), new TypeReference<>() {});
     }
 
 }

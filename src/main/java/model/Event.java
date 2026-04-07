@@ -34,10 +34,6 @@ public class Event {
         studentsAttending.remove(student);
     }
 
-    public void saveEvent(Event event) {
-
-    }
-
     //Getters
     public List<Student> getStudentsAttending() { return new ArrayList<>(studentsAttending); }
     public String getTime() { return time; }

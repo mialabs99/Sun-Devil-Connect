@@ -9,6 +9,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static controller.SaveLoadData.saveEvent;
 import static model.EventFactory.createEvent;
 
 public class Leader extends User{
@@ -26,10 +27,19 @@ public class Leader extends User{
 
     public static void createNewEvent(String time, String date, String location) {
         Event newEvent = createEvent(time, date, location);
+        try {
+            saveEvent(newEvent);
+        } catch(Exception e) {
+            System.out.println("Could not save event to the file: " + e.getMessage());
+        }
     }
 
     public static void addClub(Club club) {
         currentClubs.add(club);
+    }
+
+    public static void applyForNewClub() {
+
     }
 
     public static void manageEvent(Event event, String modification) {
