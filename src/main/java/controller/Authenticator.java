@@ -6,6 +6,9 @@
 
 package controller;
 
+import model.Admin;
+import model.Leader;
+import model.Student;
 import model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -35,19 +38,22 @@ public class Authenticator {
 
     public static void authenticateSignIn(String asuriteID, String password) {
         try {
+            System.out.println("Attempting to load users...");
             loadUsers();
+            System.out.println("Loaded users successfully");
             for(User user: users) {
                 if(user.getasuriteID().equals(asuriteID)) {
                     System.out.println("Found valid ASURITE ID. Validating password...");
+                    System.out.println("User role detected: " + user.getUserRole());
                     if(user.getPassword().equals(password)) {
                         System.out.println("Password matches. Logging user into the system.");
-                        if(user.getUserRole() == User.role.student) {
+                        if(user instanceof Student) {
                             System.out.println("Switching screen to student view");
                             ViewManager.displayStudentView(user.getFirstName());
-                        } else if(user.getUserRole() == User.role.leader) {
+                        } else if(user instanceof Leader) {
                             System.out.println("Switching screen to leader view");
                             ViewManager.displayLeaderView(user.getFirstName());
-                        } else if(user.getUserRole() == User.role.admin) {
+                        } else if(user instanceof Admin) {
                             System.out.println("Switching screen to admin view");
                             ViewManager.displayAdminView(user.getFirstName());
                         }
@@ -67,15 +73,12 @@ public class Authenticator {
     }
 
     public static void saveUser(String firstName, String lastName, String asuriteID, String password, String role) throws Exception {
-        User.role userRole = null;
-        if(role.equals("Student")) {
-            userRole = User.role.student;
-        } else if(role.equals("Leader")) {
-            userRole = User.role.leader;
-        } else if(role.equals("Admin")) {
-            userRole = User.role.admin;
-        }
-        User newUser = new User(asuriteID, password, firstName, lastName, userRole);
+        User newUser = switch (role) {
+            case "Student" -> new Student(asuriteID, password, firstName, lastName);
+            case "Leader" -> new Leader(asuriteID, password, firstName, lastName);
+            case "Admin" -> new Admin(asuriteID, password, firstName, lastName);
+            default -> null;
+        };
         File file = new File("users.json");
         ObjectMapper mapper = new ObjectMapper();
         if(file.exists()) {

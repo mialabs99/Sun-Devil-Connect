@@ -6,7 +6,21 @@
 
 package model;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "userRole"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Student.class, name = "student"),
+        @JsonSubTypes.Type(value = Leader.class, name = "leader"),
+        @JsonSubTypes.Type(value = Admin.class, name = "admin")
+})
+
+public abstract class User {
     private String asuriteID;
     private String password;
     private String firstName;
