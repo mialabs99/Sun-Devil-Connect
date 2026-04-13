@@ -18,7 +18,7 @@ public class Student extends User{
     }
 
     public Student(String asuriteID, String password, String firstName, String lastName) {
-        super(asuriteID, password, firstName, lastName, role.student);
+        super(asuriteID, password, firstName, lastName);
         clubsJoined = new ArrayList<>();
     }
 

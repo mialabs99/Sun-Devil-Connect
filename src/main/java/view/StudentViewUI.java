@@ -12,10 +12,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import model.Event;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import static controller.SaveLoadData.getEvents;
+import static controller.SaveLoadData.loadEvents;
 
 //UI for student users
 public class StudentViewUI {
@@ -50,6 +55,13 @@ public class StudentViewUI {
     //Gets all events for the user to browse
     public static VBox eventBox() {
         VBox eventBox = new VBox();
+        List<Event> events = null;
+        try {
+            loadEvents();
+            events = getEvents();
+        } catch (Exception e) {
+            System.out.println("Could not load events: " + e.getMessage());
+        }
         return eventBox;
     }
 }

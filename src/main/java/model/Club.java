@@ -17,11 +17,17 @@ public class Club {
     private static List<Event> upcomingEvents;
     private String leaderName;
     private String clubName;
+    private String clubType;
     private static List<ClubObserver> clubObservers;
 
-    public Club(String leaderName, String clubName) {
+    public Club() {
+
+    }
+
+    public Club(String leaderName, String clubName, String clubType) {
         this.leaderName = leaderName;
         this.clubName = clubName;
+        this.clubType = clubType;
         clubMembers = new ArrayList<>();
         upcomingEvents = new ArrayList<>();
         clubObservers = new ArrayList<>();
@@ -42,4 +48,8 @@ public class Club {
     public static void removeUpcomingEvent(Event event) {
         upcomingEvents.remove(event);
     }
+
+    public String getLeaderName() { return leaderName; }
+    public String getClubName() { return clubName; }
+    public String getClubType() { return clubType; }
 }

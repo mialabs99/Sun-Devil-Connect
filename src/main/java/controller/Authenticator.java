@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Authenticator {
 
-    private static List<User> users;
+    private static List<User> users = new ArrayList<>();
 
     public static void authenticateSignUp(String asuriteID, String password, String passwordVerification,
         String firstName, String lastName, String role) {
@@ -44,7 +44,6 @@ public class Authenticator {
             for(User user: users) {
                 if(user.getasuriteID().equals(asuriteID)) {
                     System.out.println("Found valid ASURITE ID. Validating password...");
-                    System.out.println("User role detected: " + user.getUserRole());
                     if(user.getPassword().equals(password)) {
                         System.out.println("Password matches. Logging user into the system.");
                         switch (user) {
@@ -54,7 +53,7 @@ public class Authenticator {
                             }
                             case Leader leader -> {
                                 System.out.println("Switching screen to leader view");
-                                ViewManager.displayLeaderView(user.getFirstName());
+                                ViewManager.displayLeaderView(user.getFirstName(), user.getLastName());
                             }
                             case Admin admin -> {
                                 System.out.println("Switching screen to admin view");
@@ -96,8 +95,14 @@ public class Authenticator {
     }
 
     public static void loadUsers() throws Exception{
-        ObjectMapper mapper = new ObjectMapper();
-        users = mapper.readValue(new File("users.json"), new TypeReference<>() {});
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            users = mapper.readValue(new File("users.json"), new TypeReference<List<User>>() {
+            });
+        } catch (Exception e) {
+            users = new ArrayList<>();
+            System.out.println("Error loading users...");
+        }
     }
 
 }

@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Event {
+    private String eventName;
     private String time;
     private String date;
     private List<Student> studentsAttending;
     private String location;
     private List<EventObserver> eventObservers;
 
-    public Event(String time, String date, String location) {
+    public Event(String eventName, String time, String date, String location) {
+        this.eventName = eventName;
         this.time = time;
         this.date = date;
         this.location = location;
@@ -39,4 +41,5 @@ public class Event {
     public String getTime() { return time; }
     public String getDate() { return date; }
     public String getLocation() { return location; }
+    public String getEventName() { return eventName; }
 }

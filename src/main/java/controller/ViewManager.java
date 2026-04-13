@@ -58,9 +58,9 @@ public class ViewManager extends Application {
         switchScreen(StudentViewUI.studentView(firstName));
     }
 
-    public static void displayLeaderView(String firstName) {
+    public static void displayLeaderView(String firstName, String lastName) {
         System.out.println("Displaying leader view...");
-        switchScreen(LeaderViewUI.leaderView(firstName));
+        switchScreen(LeaderViewUI.leaderView(firstName, lastName));
     }
 
     public static void displayAdminView(String firstName) {
@@ -81,5 +81,10 @@ public class ViewManager extends Application {
     public static void displayInvalidAsuriteID() {
         System.out.println("Displaying invalid asurite ID...");
         switchScreen(SignInUI.invalidAsuriteID());
+    }
+
+    public static void displayCreateClubPage(String firstName, String lastName) {
+        System.out.println("Displaying page to create a club...");
+        switchScreen(ClubCreationUI.clubCreation(firstName, lastName));
     }
 }

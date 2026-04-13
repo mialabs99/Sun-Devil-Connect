@@ -9,6 +9,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.ClubFactory.createClub;
+
 public class SaveLoadData {
 
     private static List<Event> events;
@@ -31,7 +33,8 @@ public class SaveLoadData {
         events = mapper.readValue(new File("events.json"), new TypeReference<>(){});
     }
 
-    public static void saveClub(Club club) throws Exception {
+    public static void saveClub(String clubName, String clubType, String leaderName) throws Exception {
+        Club club = createClub(leaderName, clubName, clubType);
         File file = new File("clubs.json");
         ObjectMapper mapper = new ObjectMapper();
         if(file.exists()) {
@@ -43,8 +46,34 @@ public class SaveLoadData {
         mapper.writeValue(file, clubs);
     }
 
-    public static void loadClubs() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        clubs = mapper.readValue(new File("clubs.json"), new TypeReference<>(){});
+    public static void loadClubs(){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            clubs = mapper.readValue(new File("clubs.json"), new TypeReference<List<Club>>() {
+            });
+        } catch (Exception e) {
+            System.out.println("Could not load clubs from the file: " + e.getMessage());
+        }
+    }
+
+    public static List<Event> getEvents() {
+        if(events != null) {
+            return new ArrayList<>(events);
+        } else {
+            System.out.println("No events available.");
+            return null;
+        }
+    }
+    public static List<Club> getClubs() {
+        if(clubs == null) {
+            loadClubs();
+        }
+
+        if(clubs != null) {
+            return new ArrayList<>(clubs);
+        } else {
+            System.out.println("No clubs available.");
+            return null;
+        }
     }
 }

@@ -21,12 +21,12 @@ public class Leader extends User{
     }
 
     public Leader(String asuriteID, String password, String firstName, String lastName) {
-        super(asuriteID, password, firstName, lastName, role.leader);
+        super(asuriteID, password, firstName, lastName);
         currentClubs = new ArrayList<>();
     }
 
-    public static void createNewEvent(String time, String date, String location) {
-        Event newEvent = createEvent(time, date, location);
+    public static void createNewEvent(String eventName, String time, String date, String location) {
+        Event newEvent = createEvent(eventName, time, date, location);
         try {
             saveEvent(newEvent);
         } catch(Exception e) {
