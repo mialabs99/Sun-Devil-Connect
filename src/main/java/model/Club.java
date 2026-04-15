@@ -13,15 +13,17 @@ import java.util.List;
 
 public class Club {
 
-    private static List<Student> clubMembers;
-    private static List<Event> upcomingEvents;
+    private List<Student> clubMembers;
+    private List<Event> upcomingEvents;
     private String leaderName;
     private String clubName;
     private String clubType;
-    private static List<ClubObserver> clubObservers;
+    private List<ClubObserver> clubObservers;
 
     public Club() {
-
+        clubMembers = new ArrayList<>();
+        upcomingEvents = new ArrayList<>();
+        clubObservers = new ArrayList<>();
     }
 
     public Club(String leaderName, String clubName, String clubType) {
@@ -33,19 +35,19 @@ public class Club {
         clubObservers = new ArrayList<>();
     }
 
-    public static void addClubMember(Student student) {
+    public void addClubMember(Student student) {
         clubMembers.add(student);
     }
 
-    public static void removeClubMember(Student student) {
+    public void removeClubMember(Student student) {
         clubMembers.remove(student);
     }
 
-    public static void addUpcomingEvent(Event event) {
+    public void addUpcomingEvent(Event event) {
         upcomingEvents.add(event);
     }
 
-    public static void removeUpcomingEvent(Event event) {
+    public void removeUpcomingEvent(Event event) {
         upcomingEvents.remove(event);
     }
 
@@ -57,5 +59,11 @@ public class Club {
             System.out.println("No club members available for " + clubName);
         }
         return new ArrayList<Student>(clubMembers);
+    }
+    public List<Event> getUpcomingEvents() {
+        if(upcomingEvents.isEmpty()) {
+            System.out.println("No upcoming events available for " + clubName);
+        }
+        return new ArrayList<Event>(upcomingEvents);
     }
 }

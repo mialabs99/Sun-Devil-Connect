@@ -102,8 +102,8 @@ public class ViewManager extends Application {
         switchScreen(SignUpForClubUI.signUpForClub(student, club));
     }
 
-    public static void displayClubInfoPage(Club club) {
+    public static void displayClubInfoPage(Student student, Club club) {
         System.out.println("Displaying club info page...");
-        switchScreen();
+        switchScreen(ClubInfoUI.clubInfo(student, club));
     }
 }

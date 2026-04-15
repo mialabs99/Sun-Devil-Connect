@@ -30,7 +30,7 @@ public class BrowseClubsUI {
                     Label clubType = new Label("Club Type: " + club.getClubType() + " |");
                     Label clubLeader = new Label("Created By: " + club.getLeaderName());
                     Button viewInfo = new Button("View Club Info");
-                    viewInfo.setOnAction(e -> ViewManager.displayClubInfoPage(club));
+                    viewInfo.setOnAction(e -> ViewManager.displayClubInfoPage(student, club));
                     HBox clubBox = new HBox();
                     clubBox.setSpacing(10);
                     clubBox.setAlignment(Pos.CENTER);
@@ -39,6 +39,9 @@ public class BrowseClubsUI {
                 }
             }
         }
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> ViewManager.displayStudentView(student));
+        browseClubsBox.getChildren().add(backButton);
         browseClubsBox.setSpacing(10);
         browseClubsBox.setAlignment(Pos.CENTER);
         browseClubsBox.setFillWidth(false);

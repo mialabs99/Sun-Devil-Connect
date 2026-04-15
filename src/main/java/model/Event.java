@@ -19,6 +19,11 @@ public class Event {
     private String location;
     private List<EventObserver> eventObservers;
 
+    public Event() {
+        studentsAttending = new ArrayList<>();
+        eventObservers = new ArrayList<>();
+    }
+
     public Event(String eventName, String time, String date, String location) {
         this.eventName = eventName;
         this.time = time;

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Club;
 import model.Event;
+import model.Student;
+import model.StudentApplication;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class SaveLoadData {
 
     private static List<Event> events;
     private static List<Club> clubs;
+    private static List<StudentApplication> studentApplications;
 
     public static void saveEvent(Event event) throws Exception {
         File file = new File("events.json");
@@ -46,7 +49,29 @@ public class SaveLoadData {
         mapper.writeValue(file, clubs);
     }
 
-    public static void loadClubs(){
+    public static void saveStudentApplications(Club club, Student student) throws Exception {
+        StudentApplication studentApplication = new StudentApplication(student, club);
+        File file = new File("studentApplications.json");
+        ObjectMapper mapper = new ObjectMapper();
+        if(file.exists()) {
+            studentApplications = mapper.readValue(file, new TypeReference<>(){});
+        } else {
+            studentApplications = new ArrayList<>();
+        }
+        studentApplications.add(studentApplication);
+        mapper.writeValue(file, studentApplications);
+    }
+
+    public static void loadStudentApplications() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            studentApplications = mapper.readValue(new File("studentApplications.json"), new TypeReference<>(){});
+        } catch (Exception e) {
+            System.out.println("Could not load student applications from the file: " + e.getMessage());
+        }
+    }
+
+    public static void loadClubs() {
         try {
             ObjectMapper mapper = new ObjectMapper();
             clubs = mapper.readValue(new File("clubs.json"), new TypeReference<List<Club>>() {
