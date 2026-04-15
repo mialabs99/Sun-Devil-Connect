@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import model.Admin;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,8 +14,8 @@ import java.time.format.DateTimeFormatter;
 
 public class AdminViewUI {
 
-    public static Parent adminView(String firstName) {
-        Label adminViewLabel = new Label("Welcome " + firstName + "!");
+    public static Parent adminView(Admin admin) {
+        Label adminViewLabel = new Label("Welcome " + admin.getFirstName() + " " + admin.getLastName() + "!");
         VBox dateTimeBox = dateTimeBox();
         Button exit = new Button("Exit");
         exit.setOnAction(e -> ViewManager.displayWelcomePage());

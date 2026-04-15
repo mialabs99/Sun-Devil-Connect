@@ -52,4 +52,10 @@ public class Club {
     public String getLeaderName() { return leaderName; }
     public String getClubName() { return clubName; }
     public String getClubType() { return clubType; }
+    public List<Student> getClubMembers() {
+        if(clubMembers.isEmpty()) {
+            System.out.println("No club members available for " + clubName);
+        }
+        return new ArrayList<Student>(clubMembers);
+    }
 }

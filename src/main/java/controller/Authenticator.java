@@ -29,8 +29,19 @@ public class Authenticator {
             return;
         }
         try {
-            saveUser(firstName, lastName, asuriteID, password, role);
-            ViewManager.displayStudentView(firstName);
+            if(role.equals("student")) {
+                Student student = new Student(asuriteID, password, firstName, lastName);
+                saveUser(firstName, lastName, asuriteID, password, "student");
+                ViewManager.displayStudentView(student);
+            } else if(role.equals("leader")) {
+                Leader leader = new Leader(asuriteID, password, firstName, lastName);
+                saveUser(firstName, lastName, asuriteID, password, "leader");
+                ViewManager.displayLeaderView(leader);
+            } else if(role.equals("admin")) {
+                Admin admin = new Admin(asuriteID, password, firstName, lastName);
+                saveUser(firstName, lastName, asuriteID, password, "admin");
+                ViewManager.displayAdminView(admin);
+            }
         } catch (Exception e) {
             System.out.println("Could not save new user to the file: " + e.getMessage());
         }
@@ -49,15 +60,15 @@ public class Authenticator {
                         switch (user) {
                             case Student student -> {
                                 System.out.println("Switching screen to student view");
-                                ViewManager.displayStudentView(user.getFirstName());
+                                ViewManager.displayStudentView(student);
                             }
                             case Leader leader -> {
                                 System.out.println("Switching screen to leader view");
-                                ViewManager.displayLeaderView(user.getFirstName(), user.getLastName());
+                                ViewManager.displayLeaderView(leader);
                             }
                             case Admin admin -> {
                                 System.out.println("Switching screen to admin view");
-                                ViewManager.displayAdminView(user.getFirstName());
+                                ViewManager.displayAdminView(admin);
                             }
                             default -> {
                             }

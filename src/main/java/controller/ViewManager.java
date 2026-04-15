@@ -5,6 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Admin;
+import model.Club;
+import model.Leader;
+import model.Student;
 import view.*;
 
 import java.util.Objects;
@@ -53,19 +57,19 @@ public class ViewManager extends Application {
         switchScreen(SignUpUI.signUpPage());
     }
 
-    public static void displayStudentView(String firstName) {
+    public static void displayStudentView(Student student) {
         System.out.println("Displaying student view...");
-        switchScreen(StudentViewUI.studentView(firstName));
+        switchScreen(StudentViewUI.studentView(student));
     }
 
-    public static void displayLeaderView(String firstName, String lastName) {
+    public static void displayLeaderView(Leader leader) {
         System.out.println("Displaying leader view...");
-        switchScreen(LeaderViewUI.leaderView(firstName, lastName));
+        switchScreen(LeaderViewUI.leaderView(leader));
     }
 
-    public static void displayAdminView(String firstName) {
+    public static void displayAdminView(Admin admin) {
         System.out.println("Displaying admin view...");
-        switchScreen(AdminViewUI.adminView(firstName));
+        switchScreen(AdminViewUI.adminView(admin));
     }
 
     public static void displayInvalidPasswordVerification() {
@@ -83,8 +87,23 @@ public class ViewManager extends Application {
         switchScreen(SignInUI.invalidAsuriteID());
     }
 
-    public static void displayCreateClubPage(String firstName, String lastName) {
+    public static void displayCreateClubPage(Leader leader) {
         System.out.println("Displaying page to create a club...");
-        switchScreen(ClubCreationUI.clubCreation(firstName, lastName));
+        switchScreen(ClubCreationUI.clubCreation(leader));
+    }
+
+    public static void displayBrowseClubPage(Student student) {
+        System.out.println("Displaying page to browse clubs...");
+        switchScreen(BrowseClubsUI.browseClubs(student));
+    }
+
+    public static void displaySignUpForClubPage(Student student, Club club) {
+        System.out.println("Displaying page to sign up for a club...");
+        switchScreen(SignUpForClubUI.signUpForClub(student, club));
+    }
+
+    public static void displayClubInfoPage(Club club) {
+        System.out.println("Displaying club info page...");
+        switchScreen();
     }
 }

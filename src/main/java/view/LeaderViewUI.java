@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Club;
+import model.Leader;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,8 +22,8 @@ public class LeaderViewUI {
     private static String leaderName;
     private static List<Club> leaderClubs;
 
-    public static Parent leaderView(String firstName, String lastName) {
-        leaderName = firstName + " " + lastName;
+    public static Parent leaderView(Leader leader) {
+        leaderName = leader.getFirstName() + " " + leader.getLastName();
         Label leaderViewLabel = new Label("Welcome " + leaderName + "!");
         VBox dateTimeBox = dateTimeBox();
         Button exit = new Button("Exit");
@@ -30,7 +31,7 @@ public class LeaderViewUI {
         VBox clubBox = clubBox();
         VBox leaderViewBox = new VBox();
         Button addAClub = new Button("Add a Club");
-        addAClub.setOnAction(e -> ViewManager.displayCreateClubPage(firstName, lastName));
+        addAClub.setOnAction(e -> ViewManager.displayCreateClubPage(leader));
         clubBox.getChildren().add(addAClub);
         leaderViewBox.getChildren().addAll(leaderViewLabel, dateTimeBox, clubBox, exit);
         leaderViewBox.setSpacing(10);
@@ -75,15 +76,9 @@ public class LeaderViewUI {
         return clubBox;
     }
 
-    //Gets all information about the events connected to the leader's clubs
-    public static VBox eventBox() {
-        VBox eventBox = new VBox();
-        return eventBox;
-    }
-
     public static HBox createIndividualClubBox(Club club) {
         HBox individualBox = new HBox();
-        Label clubName = new Label("Club Name: " + club.getClubName() + " ");
+        Label clubName = new Label("Club Name: " + club.getClubName() + "|");
         Label clubType = new Label("Club Type: " + club.getClubType());
         individualBox.getChildren().addAll(clubName, clubType);
         return individualBox;

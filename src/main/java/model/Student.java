@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Student extends User{
 
-    private static List<Club> clubsJoined;
+    private List<Club> clubsJoined = new ArrayList<>();
 
     public Student() {
         super();
@@ -22,8 +22,10 @@ public class Student extends User{
         clubsJoined = new ArrayList<>();
     }
 
-    public static void joinClub() {
-
+    public void joinClub(Club club) {
+        if(!clubsJoined.contains(club)) {
+            clubsJoined.add(club);
+        }
     }
 
     public static void browseClubs() {
@@ -32,5 +34,9 @@ public class Student extends User{
 
     public static void registerForEvent(Event event) {
 
+    }
+
+    public List<Club> getClubsJoined() {
+        return new ArrayList<Club>(clubsJoined);
     }
 }

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Leader;
 
 import static controller.SaveLoadData.saveClub;
 import static controller.ViewManager.displayLeaderView;
@@ -16,8 +17,8 @@ public class ClubCreationUI {
     
     private static TextField name;
 
-    public static Parent clubCreation(String firstName, String lastName) {
-        String currentUser = firstName + " " + lastName;
+    public static Parent clubCreation(Leader leader) {
+        String currentUser = leader.getFirstName() + " " + leader.getLastName();
         VBox clubCreationBox = new VBox();
         HBox clubName = createHBox("Club Name: ");
         HBox clubType = new HBox();
@@ -35,7 +36,7 @@ public class ClubCreationUI {
         createClub.setOnAction(e -> {
             try {
                 saveClub(name.getText(), dropdown.getValue(), currentUser);
-                displayLeaderView(firstName, lastName);
+                displayLeaderView(leader);
             } catch (Exception ex) {
                 System.out.println("Could not save club to the system: " + ex.getMessage());
             }
