@@ -80,15 +80,20 @@ public class StudentViewUI {
         Label clubLabel = new Label("Here are your current clubs:");
         clubBox.getChildren().add(clubLabel);
         List<Club> currentClubs = student.getClubsJoined();
-        for(Club club: currentClubs) {
-            HBox clubInfo = new HBox();
-            Label clubName = new Label("Club Name: " + club.getClubName() + " |");
-            Label clubType = new Label("Club Type: " + club.getClubType() + " |");
-            Label clubLeader = new Label("Lead By: " + club.getLeaderName() + " |");
-            clubInfo.setSpacing(10);
-            clubInfo.setAlignment(Pos.CENTER);
-            clubInfo.getChildren().addAll(clubName, clubType, clubLeader);
-            clubBox.getChildren().add(clubInfo);
+        if(!(currentClubs == null || currentClubs.isEmpty())) {
+            for (Club club : currentClubs) {
+                HBox clubInfo = new HBox();
+                Label clubName = new Label("Club Name: " + club.getClubName() + " |");
+                Label clubType = new Label("Club Type: " + club.getClubType() + " |");
+                Label clubLeader = new Label("Lead By: " + club.getLeaderName() + " |");
+                clubInfo.setSpacing(10);
+                clubInfo.setAlignment(Pos.CENTER);
+                clubInfo.getChildren().addAll(clubName, clubType, clubLeader);
+                clubBox.getChildren().add(clubInfo);
+            }
+        } else {
+            Label noClubs = new Label("You are not currently signed up for any clubs!");
+            clubBox.getChildren().add(noClubs);
         }
         clubBox.setSpacing(10);
         clubBox.setAlignment(Pos.CENTER);
